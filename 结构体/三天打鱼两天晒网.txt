@@ -1,0 +1,36 @@
+#include<stdio.h>
+int inputdate();
+int main()
+{
+    int n = inputdate();
+   /*  if(-1==n){
+        printf("Invalid input");
+    }
+    else  */
+    if(n%5==0||n%5==4){
+        printf("他在晒网");
+    }
+    else{
+        printf("他在打鱼");
+    }
+
+    return 0;
+}
+int inputdate()
+{
+    int year,month,day;
+    int n = scanf("%4d-%2d-%2d",&year,&month,&day);
+    /* if(3 != n||year<1990||month>12||month<=0||day>31||day<=0){
+        return -1;
+    } */
+
+    int date[2][12]={{31,28,31,30,31,30,31,31,30,31,30,31},
+                     {31,29,31,30,31,30,31,31,30,31,30,31}};
+
+    int sum = 0, flag =(year%4==0&&year%100!=0)||(year%400==0);
+    for(int i=0;i<month-1;++i){
+        sum +=date[flag][i];
+    }
+
+    return sum+day;
+}
